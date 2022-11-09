@@ -1,0 +1,166 @@
+/* game board table */
+body {
+  background-color: #4d94ff;
+}
+
+#start-btn:hover {
+  cursor: pointer;
+}
+
+#start-btn {
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  display: block;
+  margin: auto;
+  font-size: 30px;
+  background-color: gold;
+}
+
+#start {
+  height: 100vh;
+  font-family:'Courier New', Courier, monospace;
+  color: black;
+  position: relative;
+  margin: auto;
+  width: 90vw;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+#title {
+  font-size: 4rem;
+  perspective: 600px;
+  font-family: 'Poppins', sans-serif;
+  color: red;
+  text-shadow: -1px 2px 4px white;
+  text-shadow: 1px -1px 0px white;
+  text-shadow: 1px 2px 4px white;
+  text-shadow: -1px -1px 0px white;
+  background-color: black;
+  border-radius: 5px;
+  border: 3px solid white;
+  width: fit-content;
+  padding: 0 0.5%;
+  text-align: center;
+  margin: auto;
+}
+
+#start-page.playing {
+  margin-top: -100vh;
+  transition: margin-top 1s;
+}
+
+#start-page.playing + #game {
+  display: flex;
+}
+
+h1 {
+  font-family: 'Poppins', sans-serif;
+  background-color: black;
+  width:fit-content;
+  border-radius: 5px;
+  color: white;
+  border: 3px solid white;
+  text-align: center;
+  padding: 0 0.7%;
+  position: relative;
+  margin: auto;
+}
+
+#game {
+width:fit-content;
+background-color: rgba(255,215,0,0.9);
+position: relative;
+margin: auto;
+border: 4px solid goldenrod;
+}
+
+#board td {
+  width: 50px;
+  height: 50px;
+  border: solid 1px #666;
+  position:relative;
+}
+
+/* pieces are div within game table cells: draw as colored circles */
+
+.piece {
+  /* TODO: make into circles */
+  margin: 5px;
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  position: absolute;
+  animation: drop 500ms ease-in 0s 1 normal;
+  transition: all 500ms;
+  top: 0;
+}
+
+.piece:active {
+  animation-play-state: running;
+}
+
+@keyframes drop {
+  from {
+    
+  }
+  to {
+    top: 0;
+  }
+  
+}
+/* TODO: make pieces red/blue,  depending on player 1/2 piece */
+.player1 {
+  background-color: red;
+}
+
+.player2 {
+  background-color: blue;
+}
+
+/* column-top is table row of clickable areas for each column */
+
+#column-top td {
+  border: dashed 1px #a6a6a6;
+}
+
+#column-top td:hover {
+  background-color: black;
+  cursor: pointer;
+}
+
+#player1-color {
+  background-color: red;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+#player2-color {
+  background-color: blue;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.player-ids {
+  background-color: white;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 400;
+  position: relative;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.restart-btn {
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  display: block;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.restart-btn:hover {
+  cursor: pointer;
+}

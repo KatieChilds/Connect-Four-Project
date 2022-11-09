@@ -1,0 +1,47 @@
+<!doctype html>
+<head>
+  <title>Connect 4</title>
+  <link href="connect4.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;1,300&family=Pacifico&family=Poppins:wght@600&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="container" id="start-page">
+  <div id="start">
+    <p id="title"> CONNECT 4</p>
+    <p>Player 1 and Player 2 will alternate turns until one player gets 4 pieces in a row (horizontal, vertial or diagonal) and wins. If no one gets 4 in a row and the board fills, it is a tie!</p>
+    <div id="button">
+      <button id="start-btn">START!</button>
+    </div>
+  </div>
+</div>
+
+<h1>CONNECT 4</h1>
+
+<div>
+  <table class="player-ids">
+<tr>
+  <td>
+    <div id="player1-color"></div>
+  </td>
+  <td>Player 1</td>
+</tr>
+<tr>
+  <td>
+    <div id="player2-color"></div>
+  </td>
+  <td>Player 2</td>
+</tr>
+  </table>
+</div>
+<div id="game">
+  <table id="board"></table>
+</div>
+
+<button class="restart-btn">RESTART</button>
+
+<script src="connect4.js"></script>
+
+</body>
+</html>
