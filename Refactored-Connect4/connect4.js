@@ -4,6 +4,16 @@
  * column until a player gets four-in-a-row (horiz, vert, or diag) or until
  * board fills (tie)
  */
+//  function startGame() {
+//   const btn = document.getElementById("start-btn");
+//   btn.addEventListener("click", function (evt) {
+//     if (evt.target === btn) {
+//       console.log(evt.target);
+//       return Game.constructor();
+//     }
+//   });
+// }
+
 class Game {
   constructor(height, width) {
     this.HEIGHT = height;
@@ -11,20 +21,24 @@ class Game {
     this.currPlayer = 1;
     this.makeBoard();
     this.makeHtmlBoard();
+    this.status = "playing";
   }
+
   makeBoard() {
     this.board = [];
     for (let y = 0; y < this.HEIGHT; y++) {
       this.board.push(Array.from({ length: this.WIDTH }));
     }
   }
+
   makeHtmlBoard() {
     const board = document.getElementById("board");
     board.innerHTML = "";
 
     const top = document.createElement("tr");
     top.setAttribute("id", "column-top");
-    top.addEventListener("click", this.handleClick);
+    this.handleGameClick = this.handleClick.bind(this);
+    top.addEventListener("click", this.handleGameClick);
 
     for (let x = 0; x < this.WIDTH; x++) {
       const headCell = document.createElement("td");
@@ -45,6 +59,7 @@ class Game {
       board.append(row);
     }
   }
+
   findSpotForCol(x) {
     for (let y = this.HEIGHT - 1; y >= 0; y--) {
       if (!this.board[y][x]) {
@@ -53,6 +68,7 @@ class Game {
     }
     return null;
   }
+
   placeInTable(y, x) {
     const piece = document.createElement("div");
     piece.classList.add("piece");
@@ -61,32 +77,38 @@ class Game {
     const spot = document.getElementById(`${y}-${x}`);
     spot.append(piece);
   }
+
   endGame(msg) {
     alert(msg);
+    this.status = "game-over";
+    const top = document.querySelector("#column-top");
+    top.removeEventListener("click", this.handleGameClick);
   }
+
   handleClick(evt) {
     const x = +evt.target.id;
-    const y = findSpotForCol(x);
+    const y = this.findSpotForCol(x);
     if (y === null) {
       return;
     }
     this.board[y][x] = this.currPlayer;
-    placeInTable(y, x);
+    this.placeInTable(y, x);
 
-    if (checkForWin()) {
-      return endGame(`Player ${this.currPlayer} won!`);
+    if (this.checkForWin()) {
+      return this.endGame(`Player ${this.currPlayer} won!`);
     }
     if (
       this.board.every((row) => row.every((cell) => cell))
     ) {
-      return endGame("Tie!");
+      return this.endGame("Tie!");
     }
 
     this.currPlayer = this.currPlayer === 1 ? 2 : 1;
   }
+
   checkForWin() {
-    function _win(cells) {
-      return cells.every(
+    const _win = (cells) =>
+      cells.every(
         ([y, x]) =>
           y >= 0 &&
           y < this.HEIGHT &&
@@ -94,7 +116,6 @@ class Game {
           x < this.WIDTH &&
           this.board[y][x] === this.currPlayer
       );
-    }
 
     for (let y = 0; y < this.HEIGHT; y++) {
       for (let x = 0; x < this.WIDTH; x++) {
@@ -134,7 +155,16 @@ class Game {
     }
   }
 }
-new Game(6, 7);
+
+document
+  .getElementById("start-btn")
+  .addEventListener("click", () => {
+    console.log("new game should form");
+    new Game(6, 7);
+  });
+console.log("game running?");
+// new Game(6, 7);
+
 // const WIDTH = 7;
 // const HEIGHT = 6;
 
