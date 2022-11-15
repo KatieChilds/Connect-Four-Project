@@ -13,6 +13,7 @@ let board = []; // array of rows, each row is array of cells  (board[y][x])
 
 let start = document.getElementById("start-page");
 let startBtn = document.getElementById("start-btn");
+let gameOngoing = true;
 
 startBtn.addEventListener("click", startGame);
 
@@ -99,6 +100,9 @@ function placeInTable(y, x) {
 function endGame(msg) {
   // TODO: pop up alert message
   alert(msg);
+  gameOngoing = false;
+  const columnTop = document.querySelector("#column-top");
+  columnTop.removeEventListener("click", handleClick);
 }
 
 /** handleClick: handle click of column top to play piece */
@@ -126,7 +130,16 @@ function handleClick(evt) {
 
   // check for win
   if (checkForWin()) {
-    return endGame(`Player ${currPlayer} won!`);
+    let timer;
+    timer = setTimeout(() => {
+      delay();
+    }, 450);
+    function delay() {
+      clearTimeout(timer);
+      console.log("currPlayer in delay", currPlayer);
+      return endGame(`Player ${currPlayer} won!`);
+    }
+    return;
   }
 
   // check for tie
@@ -142,6 +155,7 @@ function handleClick(evt) {
 
   // switch players
   // TODO: switch currPlayer 1 <-> 2
+  console.log("currPlayer above switch", currPlayer);
   currPlayer === 1 ? (currPlayer = 2) : (currPlayer = 1);
 }
 
@@ -152,7 +166,6 @@ function checkForWin() {
     // Check four cells to see if they're all color of current player
     //  - cells: list of four (y, x) cells
     //  - returns true if all are legal coordinates & all match currPlayer
-
     return cells.every(
       ([y, x]) =>
         y >= 0 &&
@@ -210,9 +223,22 @@ function checkForWin() {
 makeBoard();
 makeHtmlBoard();
 
+function clearBoard() {
+  let clearHTMLBoard = document.querySelector("#game");
+  clearHTMLBoard.firstElementChild.innerHTML = "";
+  board = [];
+}
+
+function makeNewBoard() {
+  makeBoard();
+  makeHtmlBoard();
+}
+
 const restartBtn =
   document.getElementsByClassName("restart-btn")[0];
 restartBtn.addEventListener("click", function () {
-  document.location.reload();
+  clearBoard();
+  currPlayer = 1;
+  gameOngoing = true;
+  makeNewBoard();
 });
-// Used stackoverflow to help with reload function.
