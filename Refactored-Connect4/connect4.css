@@ -3,7 +3,7 @@
 #board td {
   width: 50px;
   height: 50px;
-  border: solid 1px #666;
+  border: solid 2px #666;
 }
 
 /* pieces are div within game table cells: draw as colored circles */
@@ -18,9 +18,43 @@
 /* column-top is table row of clickable areas for each column */
 
 #column-top td {
-  border: dashed 1px lightgray;
+  border: dashed 2px lightgray;
 }
 
 #column-top td:hover {
   background-color: gold;
+  cursor: pointer;
+}
+
+body {
+  background-color: lightslategray;
+}
+
+#game {
+  background-color: whitesmoke;
+  width: fit-content;
+  position: relative;
+  margin: auto;
+}
+
+#players {
+ display: flex;
+ justify-content: center;
+ margin-top: 10px;
+ margin-bottom: 10px; 
+}
+
+h1 {
+  font-size: 3rem;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  text-align: center;
+  color: white;
+  text-shadow: 2px 1px 4px black,
+   1px 2px 4px black,
+   -2px 1px 4px black,
+   1px -2px 4px black;
+}
+
+#start-btn:hover {
+cursor: pointer;
 }

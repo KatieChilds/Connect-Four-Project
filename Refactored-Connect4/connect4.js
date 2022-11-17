@@ -165,7 +165,6 @@ class Game {
 document
   .getElementById("start-btn")
   .addEventListener("click", () => {
-    // evt.preventDefault();
     let p1 = new Player(
       document.getElementById("color-player1").value
     );
